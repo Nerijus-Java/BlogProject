@@ -1,11 +1,21 @@
 package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.model.Blog;
+import lt.codeacademy.blogproject.repository.BlogRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-public class BlogServiceIMpl implements BlogService{
+@Service
+public class BlogServiceMpl implements BlogService{
+
+    private final BlogRepository blogRepository;
+
+    public BlogServiceMpl(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
+    }
+
     @Override
     public void addBlog(Blog blog) {
 
@@ -18,7 +28,7 @@ public class BlogServiceIMpl implements BlogService{
 
     @Override
     public List<Blog> getAllBlogs() {
-        return null;
+        return blogRepository.findAll();
     }
 
     @Override

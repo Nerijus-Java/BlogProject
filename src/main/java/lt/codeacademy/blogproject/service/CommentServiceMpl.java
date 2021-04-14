@@ -1,10 +1,12 @@
 package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.model.Comment;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class CommentServiceMpl implements CommentService{
     @Override
     public void addComment(Comment comment) {
