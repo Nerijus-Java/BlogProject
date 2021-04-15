@@ -16,7 +16,12 @@ public class Blog {
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     private UUID blogID;
+
     private String title;
+
     private String description;
+
+    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
+    @Type(type = "uuid-char")
     private UUID userID;
 }

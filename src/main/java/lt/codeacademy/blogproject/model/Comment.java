@@ -16,7 +16,14 @@ public class Comment {
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     private UUID commentID;
+
     private String description;
+
+    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
+    @Type(type = "uuid-char")
     private UUID userID;
+
+    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
+    @Type(type = "uuid-char")
     private UUID blogID;
 }
