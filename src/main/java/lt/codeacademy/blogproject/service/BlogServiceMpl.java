@@ -18,12 +18,12 @@ public class BlogServiceMpl implements BlogService{
 
     @Override
     public void addBlog(Blog blog) {
-
+        blogRepository.save(blog);
     }
 
     @Override
-    public void getBlog(UUID id) {
-
+    public Blog getBlog(UUID id) {
+        return blogRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -33,16 +33,16 @@ public class BlogServiceMpl implements BlogService{
 
     @Override
     public void updateBlog(Blog blog) {
-
+        blogRepository.save(blog);
     }
 
     @Override
     public void removeBlog(UUID id) {
-
+        blogRepository.deleteById(id);
     }
 
     @Override
     public Blog getByTitle(String title) {
-        return null;
+        return blogRepository.findByTitle(title);
     }
 }

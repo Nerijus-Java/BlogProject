@@ -9,7 +9,7 @@ public interface CommentService {
 
     void addComment(Comment comment);
 
-    void getComment(UUID id);
+    Comment getComment(UUID id);
 
     List<Comment> getAllComments();
 

@@ -9,7 +9,7 @@ public interface BlogService {
 
     void addBlog(Blog blog);
 
-    void getBlog(UUID id);
+    Blog getBlog(UUID id);
 
     List<Blog> getAllBlogs();
 
