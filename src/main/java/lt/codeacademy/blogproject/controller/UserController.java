@@ -34,7 +34,6 @@ public class UserController {
     @PostMapping("/create")
     public String createProduct(User user) {
         userService.addUser(user);
-
         return "redirect:/user/create?message=success";
     }
 }
