@@ -1,5 +1,6 @@
 package lt.codeacademy.blogproject.controller;
 
+import lt.codeacademy.blogproject.model.Blog;
 import lt.codeacademy.blogproject.service.BlogService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,4 +22,11 @@ public class BlogController {
         model.addAttribute("blog",blogService.getAllBlogs());
         return "blog";
     }
+
+//    @GetMapping("/create")
+//    public String openCreateProductForm(Model model) {
+//        model.addAttribute("product", new Blog());
+//
+//        return "oneBlog";
+//    }
 }
