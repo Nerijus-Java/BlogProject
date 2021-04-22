@@ -1,13 +1,20 @@
-body{
+body {
     background-image: url("../img/prism.png");
 }
 
-.Logo{
+.Logo {
     max-height: 36px;
     max-width: 36px;
 }
 
-.first-image{
+nav {
+    background-color: #0a1616;
+}
+
+
+
+
+.first-image {
     background-image: url("../img/mountRed.png");
     background-repeat: no-repeat, repeat;
     background-position: center;
@@ -15,23 +22,54 @@ body{
     background-size: cover;
 }
 
-
-.top-background{
-    min-height: 200px;
-    min-width: 100%;
+.non-center-background {
+    background-position: unset;
 }
 
-.row{
+.top-background {
+    min-height: 224px;
+    min-width: 100%;
+    transform: scaleY(-1);
+    position: relative;
+    top: 0px;
+}
+
+
+.row {
     padding: 20px;
 }
 
-.card{
+.card {
     margin: 0px auto 5px;
     padding: 0px;
 }
 
+.reg-container {
+    max-width: 500px;
+    color: white;
+    background-color: #383838d9;
+    border: 1px solid #ff000080;
+    padding: 20px 20px;
+    margin-top: 14%;
+    border-radius: 2%;
+}
 
+.error-page-text{
+    font-size: 143px;
+    color: red;
+}
 
+.button-color{
+    color: #fff;
+    background-color: #383838;
+    border-color: #dc3545;
+}
+
+.main-color{
+    color: white;
+    background-color: #383838d9;
+    border: 1px solid #ff000080;
+}
 
 .flip-card {
     background-color: transparent;
@@ -49,7 +87,7 @@ body{
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .flip-card:hover .flip-card-inner {
