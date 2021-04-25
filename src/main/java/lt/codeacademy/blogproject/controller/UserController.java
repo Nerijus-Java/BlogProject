@@ -25,15 +25,14 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public String openCreateProductForm(Model model,String message) {
+    public String openCreateProductForm(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("success", message);
         return "register";
     }
 
     @PostMapping("/create")
     public String createProduct(User user) {
         userService.addUser(user);
-        return "redirect:/user/create?message=success";
+        return "redirect:/user/create";
     }
 }

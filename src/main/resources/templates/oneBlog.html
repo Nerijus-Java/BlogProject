@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/main :: header('Blog')"></head>
+
+<body>
+<nav th:replace="fragments/main :: navbar"></nav>
+
+<div class="container mt-3 main-color" th:object="${user}">
+    <h1 th:text="*{username}"></h1>
+</div>
+
+
+<div class="container mt-3 main-color" th:object="${blog}">
+    <h1 th:text="*{title}" class=""></h1>
+    <div th:text="*{description}"></div>
+</div>
+
+</body>
+</html>

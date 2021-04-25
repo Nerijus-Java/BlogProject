@@ -11,8 +11,9 @@ nav {
     background-color: #0a1616;
 }
 
-
-
+.onHover:hover{
+    border: 1px solid rgb(255, 0, 0);
+}
 
 .first-image {
     background-image: url("../img/mountRed.png");
@@ -34,7 +35,6 @@ nav {
     top: 0px;
 }
 
-
 .row {
     padding: 20px;
 }
@@ -52,6 +52,10 @@ nav {
     padding: 20px 20px;
     margin-top: 14%;
     border-radius: 2%;
+}
+
+.reg-container:hover{
+    background-color: #383838;
 }
 
 .error-page-text{
