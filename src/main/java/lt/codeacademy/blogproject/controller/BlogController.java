@@ -43,7 +43,7 @@ public class BlogController {
         return "redirect:/blog/private/create";
     }
 
-    @GetMapping("/public/open")
+    @GetMapping("/open")
     public String openBlog(@RequestParam UUID id, Model model){
         Blog blog = blogService.getBlog(id);
 

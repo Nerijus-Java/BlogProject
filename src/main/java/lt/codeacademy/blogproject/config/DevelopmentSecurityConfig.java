@@ -30,7 +30,7 @@ public class DevelopmentSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/img/**","/signIn","/public/**","/blog","/")
+                .antMatchers("/img/**","/signIn","/blog/open/**","/blog","/")
                 .permitAll()
                 .antMatchers("/private/**").authenticated()
                 .anyRequest()
