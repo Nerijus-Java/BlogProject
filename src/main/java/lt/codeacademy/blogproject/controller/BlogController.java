@@ -5,6 +5,7 @@ import lt.codeacademy.blogproject.model.Comment;
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.service.BlogService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +39,10 @@ public class BlogController {
     }
 
     @PostMapping("/private/create")
-    public String createBlog(Blog blog) {
+    public String createBlog(Blog blog,@AuthenticationPrincipal User user) {
+        blog.setUser(user);
         blogService.addBlog(blog);
+
         return "redirect:/blog/private/create";
     }
 
