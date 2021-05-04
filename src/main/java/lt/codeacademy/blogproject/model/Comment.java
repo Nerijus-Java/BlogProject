@@ -21,11 +21,11 @@ public class Comment {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "commentIdBlog")
     private Blog blog;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "commentIdUser")
     private User user;
 

@@ -16,6 +16,6 @@ public class UserServiceMpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException(s + " dose not exist"));
+        return userRepository.findByNameWithRows(s).orElseThrow(() -> new UsernameNotFoundException(s + " dose not exist"));
     }
 }

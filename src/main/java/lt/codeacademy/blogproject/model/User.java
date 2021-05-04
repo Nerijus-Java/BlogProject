@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "commentIdUser")
     private Set<Comment> comments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Role> roles;
 
     @Override
