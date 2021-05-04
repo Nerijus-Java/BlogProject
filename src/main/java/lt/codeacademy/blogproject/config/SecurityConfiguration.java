@@ -8,27 +8,28 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@EnableWebSecurity
 @Profile("production")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final String h2ConsolePath;
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration(@Value("${spring.h2.console.path:}")String h2ConsolePath, UserDetailsService userDetailsService) {
-        this.h2ConsolePath = h2ConsolePath;
+    public SecurityConfiguration( UserDetailsService userDetailsService) {
+
         this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/img/**","/signIn","/blog/open/**","/blog","/")
+                .antMatchers("/img/**","/signIn","/blog/open/**","/blog")
                 .permitAll()
                 .antMatchers("/private/**").authenticated()
                 .anyRequest()
@@ -45,8 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
-                .antMatchers(h2ConsolePath + "/**");
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
     @Override
