@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/main :: header('Login')"></head>
+
+<body>
+<nav th:replace="fragments/main :: navbar"></nav>
+<div class="container">
+
+    <div th:if="${param.error ne null}" class="alert alert-danger">
+        Username or Password is incorrect
+    </div>
+
+    <form method="post" th:action="@{/signIn}">
+        <div class="mb-3">
+
+            <label class="form-label" for="name">Login name</label>
+            <input class="form-control" id="name" name="loginName">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="loginPassword">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+</body>
+</html>

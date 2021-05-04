@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/main :: header('Blog')"></head>
+
+<body>
+<nav th:replace="fragments/main :: navbar"></nav>
+
+<div class="container reg-container">
+    <form method="POST" th:object="${blog}">
+
+        <div class="mb-3">
+            <label for="title" class="form-label" >Title</label><br/>
+            <div class="d-grid gap-2">
+                <input type="text" placeholder="title" id="title" name="title" th:field="*{title}">
+            </div>
+        </div>
+
+        <div class="mb-3 ">
+            <label for="description" class="form-label">description</label><br/>
+            <div class="d-grid gap-2">
+                <input type="text" placeholder="description" id="description" name="description" th:field="*{description}">
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-danger">Create</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

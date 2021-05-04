@@ -1,12 +1,14 @@
 package lt.codeacademy.blogproject.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "Comments")
 public class Comment {
@@ -19,11 +21,13 @@ public class Comment {
 
     private String description;
 
-    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
-    @Type(type = "uuid-char")
-    private UUID userID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "commentIdBlog")
+    private Blog blog;
 
-    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
-    @Type(type = "uuid-char")
-    private UUID blogID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "commentIdUser")
+    private User user;
+
+
 }

@@ -10,7 +10,7 @@
 <div class="top-background container-fluid first-image"></div>
 
 
-<div class="container mt-2 bg-dark" th:unless="${#lists.isEmpty(users)}">
+<div class="container mt-2 main-container" th:unless="${#lists.isEmpty(users)}">
     <div class="row">
         <div class="flip-card" th:each="user: ${users}">
             <div class="flip-card-inner">

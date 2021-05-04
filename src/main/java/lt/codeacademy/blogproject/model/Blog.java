@@ -1,14 +1,17 @@
 package lt.codeacademy.blogproject.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "BLogs")
+@Table(name = "Blogs")
 public class Blog {
 
     @Id
@@ -21,7 +24,12 @@ public class Blog {
 
     private String description;
 
-    @Column(columnDefinition = "VARCHAR(36)", updatable = false)
-    @Type(type = "uuid-char")
-    private UUID userID;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "commentIdBlog")
+    private Set<Comment> comments;
+
+    @ManyToOne
+    @JoinColumn(name = "blogIdUser")
+    private User user;
+
 }

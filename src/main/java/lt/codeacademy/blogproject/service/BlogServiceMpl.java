@@ -18,6 +18,9 @@ public class BlogServiceMpl implements BlogService{
 
     @Override
     public void addBlog(Blog blog) {
+        if (blog == null){
+            return;
+        }
         blogRepository.save(blog);
     }
 
