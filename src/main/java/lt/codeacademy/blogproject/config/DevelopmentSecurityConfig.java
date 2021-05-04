@@ -41,7 +41,7 @@ public class DevelopmentSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/signIn")
                 .passwordParameter("loginPassword")
                 .usernameParameter("loginName")
-                .defaultSuccessUrl("/public/blog" , true)
+                .defaultSuccessUrl("/blog" , true)
                 .failureUrl("/signIn?error");
     }
 

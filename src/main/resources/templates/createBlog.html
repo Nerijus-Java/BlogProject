@@ -6,7 +6,7 @@
 <nav th:replace="fragments/main :: navbar"></nav>
 
 <div class="container reg-container">
-    <form method="POST" th:object="${blog}">
+    <form method="POST" th:object="${blog}" th:action="@{/blog/private/create}">
 
         <div class="mb-3">
             <label for="title" class="form-label" >Title</label><br/>
@@ -18,7 +18,7 @@
         <div class="mb-3 ">
             <label for="description" class="form-label">description</label><br/>
             <div class="d-grid gap-2">
-                <input type="text" placeholder="description" id="description" name="description" th:field="*{description}">
+                <input type="text"  placeholder="description" id="description" name="description" th:field="*{description}">
             </div>
         </div>
 
