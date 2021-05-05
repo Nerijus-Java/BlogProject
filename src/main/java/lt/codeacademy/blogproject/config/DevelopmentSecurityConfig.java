@@ -1,5 +1,6 @@
 package lt.codeacademy.blogproject.config;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,5 @@
 package lt.codeacademy.blogproject.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,15 +22,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration( UserDetailsService userDetailsService) {
 
+    public SecurityConfiguration(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/img/**","/signIn","/blog/open/**","/blog")
+                .antMatchers("/img/**","/signIn","/blog/open/**","/blog","/user/**")
                 .permitAll()
                 .antMatchers("/private/**").authenticated()
                 .anyRequest()
@@ -53,12 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 
     @Bean
     public PasswordEncoder encoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }

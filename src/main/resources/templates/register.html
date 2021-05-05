@@ -1,13 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/main :: header('Blog')"></head>
 
 <body class="first-image non-center-background">
 
 <div class="container reg-container">
-    <form method="POST" th:object="${user}">
+    <form method="POST" th:object="${user}" th:action="@{/user/create}">
 
         <div class="mb-3">
             <label for="username" class="form-label" >Username</label><br/>
