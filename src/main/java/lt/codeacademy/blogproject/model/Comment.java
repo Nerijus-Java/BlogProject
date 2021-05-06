@@ -1,6 +1,5 @@
 package lt.codeacademy.blogproject.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -28,6 +27,5 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "commentIdUser")
     private User user;
-
 
 }
