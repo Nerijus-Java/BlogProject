@@ -6,6 +6,7 @@ import lt.codeacademy.blogproject.service.BlogService;
 import lt.codeacademy.blogproject.service.CommentService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,6 @@ public class CommentController {
         this.blogService = blogService;
         this.commentService = commentService;
     }
-
 
     @GetMapping("/create")
     public String openCreateComment(Model model, @RequestParam UUID id){

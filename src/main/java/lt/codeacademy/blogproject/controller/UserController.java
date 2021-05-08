@@ -5,6 +5,7 @@ import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.service.RoleService;
 import lt.codeacademy.blogproject.service.UserServiceMpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,12 @@ public class UserController {
 
     private final UserServiceMpl userServiceMpl;
     private final RoleService roleService;
+    private final PasswordEncoder encoder;
 
-    public UserController(UserServiceMpl userServiceMpl, RoleService roleService) {
+    public UserController(UserServiceMpl userServiceMpl, RoleService roleService, PasswordEncoder encoder) {
         this.userServiceMpl = userServiceMpl;
         this.roleService = roleService;
+        this.encoder = encoder;
     }
 
     @GetMapping("/create")
@@ -35,14 +38,13 @@ public class UserController {
     @PostMapping("/create")
     public String createProduct(User user) {
         Set<Role> roles = new HashSet<>();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
         roles.add(roleService.getRoleByName("USER"));
         user.setRoles(roles);
 
         String encodedPass = encoder.encode(user.getPassword());
 
-        user.setPassword("{bcrypt}" + encodedPass);
+        user.setPassword(encodedPass);
         userServiceMpl.saveUser(user);
         return "redirect:/signIn";
     }
