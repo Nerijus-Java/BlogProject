@@ -12,20 +12,23 @@
 
 <!--</div>-->
 
-<div class="container mt-2" th:if="${#lists.isEmpty(blog)}">
+<div class="container text-white main-container mt-3 text-center" th:if="${#lists.isEmpty(blog)}">
     <h1>No Blogs made yet</h1>
 </div>
 
-<div class="container text-white main-container mt-3">
+<div class="container text-white main-container mt-3 text-center" th:if="!${#lists.isEmpty(blog)}">
     <h1>Blogs</h1>
 </div>
-
 
 <div class="container mt-2 main-container">
     <div class="container">
         <a class="btn btn-outline-danger" th:href="@{/blog/private/create}">Add post</a>
     </div>
+</div>
 
+
+<div class="container mt-2 main-container">
+    
     <div class="mt-1" th:unless="${#lists.isEmpty(blog)}">
         <div class="row">
             <div class="card main-color onHover" style="width: 18rem;" th:each="blog: ${blog}">
@@ -60,7 +63,7 @@
 </div>
 
 
-<footer class="footer mt-auto py-3 bg-dark">
+<footer class="mt-auto py-3 footer-color">
     1
 </footer>
 

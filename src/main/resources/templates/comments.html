@@ -9,9 +9,9 @@
     <form method="POST" th:object="${comment}" th:action="@{/comment/create/{id}(id = ${blogId})}">
 
         <div class="mb-3">
-            <label for="title" class="form-label" >Title</label><br/>
+            <label for="Comment" class="form-label" >Comment</label><br/>
             <div class="d-grid gap-2">
-                <input type="text" placeholder="title" id="title" name="title" th:field="*{description}">
+                <input type="text" placeholder="Comment" id="Comment" th:field="*{description}">
             </div>
         </div>
 
@@ -20,6 +20,10 @@
         </div>
     </form>
 </div>
+
+<footer class="mt-auto py-3 footer-color">
+    1
+</footer>
 
 </body>
 </html>

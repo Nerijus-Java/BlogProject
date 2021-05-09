@@ -5,7 +5,8 @@
 
 <body>
 <nav th:replace="fragments/main :: navbar"></nav>
-<div class="container">
+
+<div class="container reg-container">
 
     <div th:if="${param.error ne null}" class="alert alert-danger">
         Username or Password is incorrect
@@ -13,7 +14,6 @@
 
     <form method="post" th:action="@{/signIn}">
         <div class="mb-3">
-
             <label class="form-label" for="name">Login name</label>
             <input class="form-control" id="name" name="loginName">
         </div>
@@ -23,8 +23,13 @@
             <input type="password" class="form-control" id="password" name="loginPassword">
         </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-danger">Login</button>
+        </div>
     </form>
 </div>
+<footer class="mt-auto py-3 footer-color">
+    1
+</footer>
 </body>
 </html>
