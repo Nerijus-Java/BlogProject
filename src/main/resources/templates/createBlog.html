@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/main :: header('Blog')"></head>
+<head th:replace="fragments/main :: header('Create Blog')"></head>
 
 <body>
 <nav th:replace="fragments/main :: navbar"></nav>
@@ -9,22 +9,19 @@
     <form method="POST" th:object="${blog}" th:action="@{/blog/private/create}">
 
         <div class="mb-3">
-            <label for="title" class="form-label" >Title</label><br/>
-            <div class="d-grid gap-2">
-                <input type="text" placeholder="title" id="title" name="title" th:field="*{title}">
-            </div>
+            <label for="title" class="form-label" th:text="#{Title}"></label>
+            <input type="text" class="form-control" th:placeholder="#{Title}" id="title" name="title" th:field="*{title}">
         </div>
 
         <div class="mb-3 ">
-            <label for="description" class="form-label">description</label><br/>
-            <div class="d-grid gap-2">
-                <input type="text"  placeholder="description" id="description" name="description" th:field="*{description}">
-            </div>
+            <label for="description" class="form-label" th:text="#{description}"></label>
+            <input type="text" class="form-control" th:placeholder="#{description}" id="description" name="description" th:field="*{description}">
         </div>
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-outline-danger">Create</button>
+            <button type="submit" class="btn btn-outline-danger" th:text="#{Create}">Create</button>
         </div>
+
     </form>
 </div>
 

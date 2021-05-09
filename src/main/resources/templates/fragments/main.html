@@ -27,10 +27,10 @@
 
             <div class="d-flex ms-auto text-white" sec:authorize="!isAuthenticated()">
                 <a th:href="@{/signIn}" class="btn btn-outline-danger me-2" tabindex="-1" role="button" >
-                    <i class="fa fa-sign-in me-1" aria-hidden="true"></i>Login
+                    <i class="fa fa-sign-in me-1" aria-hidden="true"></i><span th:text="#{login}"></span>
                 </a>
                 <a th:href="@{/user/create}" class="btn btn-outline-danger me-2" tabindex="-1" role="button" >
-                    <i class="fa fa-sign-out me-1" aria-hidden="true"></i>Register
+                    <i class="fa fa-sign-out me-1" aria-hidden="true"></i><span th:text="#{register}">Register</span>
                 </a>
             </div>
 

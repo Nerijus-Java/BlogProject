@@ -8,23 +8,22 @@
 
 <div class="container reg-container">
 
-    <div th:if="${param.error ne null}" class="alert alert-danger">
-        Username or Password is incorrect
+    <div th:if="${param.error ne null}" class="alert alert-danger" th:text="#{login.error}">
     </div>
 
     <form method="post" th:action="@{/signIn}">
         <div class="mb-3">
-            <label class="form-label" for="name">Login name</label>
+            <label class="form-label" for="name" th:text="#{login.name}"></label>
             <input class="form-control" id="name" name="loginName">
         </div>
 
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label" th:text="#{login.password}"></label>
             <input type="password" class="form-control" id="password" name="loginPassword">
         </div>
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-outline-danger">Login</button>
+            <button type="submit" class="btn btn-outline-danger" th:text="#{login}"></button>
         </div>
     </form>
 </div>

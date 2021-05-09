@@ -9,14 +9,12 @@
     <form method="POST" th:object="${comment}" th:action="@{/comment/create/{id}(id = ${blogId})}">
 
         <div class="mb-3">
-            <label for="Comment" class="form-label" >Comment</label><br/>
-            <div class="d-grid gap-2">
-                <input type="text" placeholder="Comment" id="Comment" th:field="*{description}">
-            </div>
+            <label for="Comment" class="form-label" th:text="#{Comment}"></label>
+            <input type="text" th:placholder="#{Comment}" class="form-control" id="Comment" th:field="*{description}">
         </div>
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-outline-danger">Create</button>
+            <button type="submit" class="btn btn-outline-danger" th:text="#{Create}"></button>
         </div>
     </form>
 </div>

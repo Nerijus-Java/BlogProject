@@ -23,7 +23,7 @@
 
 <div class="container main-container text-white mt-3 ">
     <div th:object="${blog}" class="comments-container">
-        <a class="btn btn-outline-danger" th:href="@{/comment/create(id=${blog.getBlogID()})}">Add comment</a>
+        <a class="btn btn-outline-danger" th:href="@{/comment/create(id=${blog.getBlogID()})}" th:text="#{add.comment}"></a>
     </div>
 </div>
 
