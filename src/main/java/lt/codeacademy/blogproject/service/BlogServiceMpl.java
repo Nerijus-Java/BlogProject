@@ -1,6 +1,7 @@
 package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.model.Blog;
+import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,9 @@ public class BlogServiceMpl implements BlogService{
     @Override
     public Blog getByTitle(String title) {
         return blogRepository.findByTitle(title);
+    }
+
+    public List<Blog> getByUser(User user){
+        return blogRepository.findByUser(user);
     }
 }

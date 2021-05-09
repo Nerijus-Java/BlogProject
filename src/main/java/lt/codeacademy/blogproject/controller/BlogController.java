@@ -29,6 +29,8 @@ public class BlogController {
     @GetMapping
     public String getBlogs(Model model){
         model.addAttribute("blog",blogService.getAllBlogs());
+        model.addAttribute("title" ,"Blogs");
+        model.addAttribute("myBlogs",false);
         return "blog";
     }
 
@@ -62,5 +64,16 @@ public class BlogController {
 
         model.addAttribute("blog",blog);
         return "oneBlog";
+    }
+
+    @GetMapping("/delete")
+    public String deleteBlog(@RequestParam UUID id,@AuthenticationPrincipal User user){
+        User blogUser = blogService.getBlog(id).getUser();
+        if (user.getUserID().equals(blogUser.getUserID())){
+            blogService.removeBlog(id);
+            return "redirect:/user/blogs";
+        } else {
+            return "redirect:/blog";
+        }
     }
 }

@@ -12,7 +12,7 @@
 </div>
 
 <div class="container text-white main-container mt-3 text-center" th:if="!${#lists.isEmpty(blog)}">
-    <h1 th:text="#{Blogs}"></h1>
+    <h1 th:text="#{${title}}"></h1>
 </div>
 
 <div class="container mt-2 main-container">
@@ -31,6 +31,9 @@
                     <h5 class="card-title" th:text="${blog.title}"></h5>
                     <p class="card-text" th:text="${blog.description}"></p>
                     <a th:href="@{/blog/open(id=${blog.getBlogID()})}" class="btn btn-outline-danger" th:text="#{read.more}"></a>
+                    <span th:if="${myBlogs}" class="delete">
+                        <a class="btn btn-outline-danger ms-auto" th:href="@{/blog/delete(id=${blog.getBlogID()})}" th:text="#{delete}"></a>
+                    </span>
                 </div>
             </div>
         </div>

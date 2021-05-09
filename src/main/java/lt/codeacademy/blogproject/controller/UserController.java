@@ -2,9 +2,11 @@ package lt.codeacademy.blogproject.controller;
 
 import lt.codeacademy.blogproject.model.Role;
 import lt.codeacademy.blogproject.model.User;
+import lt.codeacademy.blogproject.service.BlogService;
 import lt.codeacademy.blogproject.service.RoleService;
 import lt.codeacademy.blogproject.service.UserServiceMpl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +22,14 @@ import java.util.Set;
 public class UserController {
 
     private final UserServiceMpl userServiceMpl;
+    private final BlogService blogService;
     private final RoleService roleService;
     private final PasswordEncoder encoder;
 
-    public UserController(UserServiceMpl userServiceMpl, RoleService roleService, PasswordEncoder encoder) {
+    public UserController(UserServiceMpl userServiceMpl, @Qualifier("blogServiceMpl")BlogService blogService
+            , RoleService roleService, PasswordEncoder encoder) {
         this.userServiceMpl = userServiceMpl;
+        this.blogService = blogService;
         this.roleService = roleService;
         this.encoder = encoder;
     }
@@ -47,5 +52,14 @@ public class UserController {
         user.setPassword(encodedPass);
         userServiceMpl.saveUser(user);
         return "redirect:/signIn";
+    }
+
+    @GetMapping("/blogs")
+    public String openUsersBlogs(@AuthenticationPrincipal User user, Model model){
+
+        model.addAttribute("title" ,"user.blogs");
+        model.addAttribute("blog",blogService.getByUser(user));
+        model.addAttribute("myBlogs",true);
+        return "blog";
     }
 }

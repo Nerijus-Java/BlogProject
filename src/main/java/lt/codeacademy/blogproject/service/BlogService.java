@@ -1,6 +1,7 @@
 package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.model.Blog;
+import lt.codeacademy.blogproject.model.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,4 +19,6 @@ public interface BlogService {
     void removeBlog(UUID id);
 
     Blog getByTitle(String title);
+
+     List<Blog> getByUser(User user);
 }

@@ -15,6 +15,10 @@ body {
     border-radius: 10px;
 }
 
+.delete{
+    margin-left: 74px;
+}
+
 .margin-right-auto{
     margin-right: auto;
 }
