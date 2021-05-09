@@ -7,15 +7,14 @@
 
 <div class="container reg-container">
     <form method="POST" th:object="${blog}" th:action="@{/blog/private/create}">
-
         <div class="mb-3">
             <label for="title" class="form-label" th:text="#{Title}"></label>
-            <input type="text" class="form-control" th:placeholder="#{Title}" id="title" name="title" th:field="*{title}">
+            <input type="text" class="form-control" th:placeholder="#{Title}" id="title" name="title" th:field="*{title}" th:errorclass="is-invalid">
         </div>
 
         <div class="mb-3 ">
             <label for="description" class="form-label" th:text="#{description}"></label>
-            <input type="text" class="form-control" th:placeholder="#{description}" id="description" name="description" th:field="*{description}">
+            <input type="text" class="form-control" th:placeholder="#{description}" id="description" name="description" th:field="*{description}" th:errorclass="is-invalid">
         </div>
 
         <div class="d-grid gap-2">

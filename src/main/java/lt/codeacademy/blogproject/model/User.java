@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class User implements UserDetails {
     private UUID userID;
 
     @NotBlank
+    @Pattern(regexp = "^[a-z0-9_-]{3,16}$")
     private String username;
 
     @NotBlank

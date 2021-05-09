@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -35,7 +37,12 @@ public class CommentController {
     }
 
     @PostMapping("/create/{id}")
-    public String createComment(Comment comment, @AuthenticationPrincipal User user, @PathVariable UUID id) {
+    public String createComment(@Valid Comment comment, BindingResult errors, @AuthenticationPrincipal User user, @PathVariable UUID id) {
+
+        if (errors.hasErrors()) {
+            return "comments";
+        }
+
         comment.setUser(user);
         comment.setBlog(blogService.getBlog(id));
 

@@ -41,24 +41,22 @@
                     <a class="btn btn-outline-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" th:href="@{/user/blogs}" th:text="#{user.blogs}"></a></li>
+                    <ul class="dropdown-menu main-color" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item text-white" th:href="@{/user/blogs}" th:text="#{user.blogs}"></a></li>
+                        <li><a class="dropdown-item text-white" th:href="@{/logout}" th:text="#{user.logout}"></a></li>
                     </ul>
                 </div>
             </div>
 
+
+
             <div class=" text-white dropdown me-2">
-                <a class="btn btn-outline-danger dropdown-toggle"
-                   href="#"
-                   id="navbarDropdownMenuLink"
-                   role="button"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false" th:text="#{lang.options}">
+                <a class="btn btn-outline-danger dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="#{lang.options}">
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" th:href="${{#httpServletRequest.requestURI}} + '?lang=LT'"
+                <ul class="dropdown-menu main-color" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item text-white" th:href="${{#httpServletRequest.requestURI}} + '?lang=LT'"
                            th:text="#{lang.lt}"></a></li>
-                    <li><a class="dropdown-item" th:href="${{#httpServletRequest.requestURI}} + '?lang=EN'"
+                    <li><a class="dropdown-item text-white" th:href="${{#httpServletRequest.requestURI}} + '?lang=EN'"
                            th:text="#{lang.en}"></a></li>
                 </ul>
             </div>

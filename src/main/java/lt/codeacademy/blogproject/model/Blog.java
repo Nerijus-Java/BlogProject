@@ -1,10 +1,12 @@
 package lt.codeacademy.blogproject.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,8 +22,10 @@ public class Blog {
     @Type(type = "uuid-char")
     private UUID blogID;
 
+    @Size(min = 3, max = 255)
     private String title;
 
+    @Size(min = 10, max = 255)
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)

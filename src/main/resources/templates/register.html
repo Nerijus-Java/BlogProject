@@ -12,12 +12,12 @@
 
         <div class="mb-3">
             <label class="form-label" for="username" th:text="#{username}">Username</label>
-            <input class="form-control" id="username" name="loginName" th:field="*{username}">
+            <input class="form-control" id="username" name="loginName" th:field="*{username}" th:errorclass="is-invalid">
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label" th:text="#{login.password}"></label>
-            <input type="password" class="form-control" id="password" name="loginPassword" th:field="*{password}">
+            <input type="password" class="form-control" id="password" name="loginPassword" th:field="*{password}" th:errorclass="is-invalid">
         </div>
 
         <div class="d-grid gap-2">

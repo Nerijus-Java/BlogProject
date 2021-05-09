@@ -10,7 +10,7 @@
 
         <div class="mb-3">
             <label for="comment" class="form-label" th:text="#{Comment}"></label>
-            <input type="text" th:placholder="#{Comment}" class="form-control" id="comment" name="comment" th:field="*{description}">
+            <input type="text" th:placholder="#{Comment}" class="form-control" id="comment" name="comment" th:field="*{description}" th:errorclass="is-invalid">
         </div>
 
         <div class="d-grid gap-2">

@@ -10,10 +10,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public class UserController {
     private final RoleService roleService;
     private final PasswordEncoder encoder;
 
-    public UserController(UserServiceMpl userServiceMpl, @Qualifier("blogServiceMpl")BlogService blogService
+    public UserController(UserServiceMpl userServiceMpl, @Qualifier("blogServiceMpl") BlogService blogService
             , RoleService roleService, PasswordEncoder encoder) {
         this.userServiceMpl = userServiceMpl;
         this.blogService = blogService;
@@ -41,9 +43,13 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public String createProduct(User user) {
-        Set<Role> roles = new HashSet<>();
+    public String createProduct(@Valid User user, BindingResult errors) {
 
+        if (errors.hasErrors()) {
+            return "register";
+        }
+
+        Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("USER"));
         user.setRoles(roles);
 
@@ -55,11 +61,11 @@ public class UserController {
     }
 
     @GetMapping("/blogs")
-    public String openUsersBlogs(@AuthenticationPrincipal User user, Model model){
+    public String openUsersBlogs(@AuthenticationPrincipal User user, Model model) {
 
-        model.addAttribute("title" ,"user.blogs");
-        model.addAttribute("blog",blogService.getByUser(user));
-        model.addAttribute("myBlogs",true);
+        model.addAttribute("title", "user.blogs");
+        model.addAttribute("blog", blogService.getByUser(user));
+        model.addAttribute("myBlogs", true);
         return "blog";
     }
 }
