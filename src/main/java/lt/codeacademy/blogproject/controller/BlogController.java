@@ -2,8 +2,12 @@ package lt.codeacademy.blogproject.controller;
 
 import lt.codeacademy.blogproject.model.Blog;
 import lt.codeacademy.blogproject.model.Comment;
+import lt.codeacademy.blogproject.model.Role;
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.service.BlogService;
+import lt.codeacademy.blogproject.service.CommentService;
+import lt.codeacademy.blogproject.service.RoleService;
+import lt.codeacademy.blogproject.service.UserServiceIMPL;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,9 +27,16 @@ import java.util.UUID;
 public class BlogController {
 
     private final BlogService blogService;
+    private final RoleService roleService;
+    private final UserServiceIMPL userServiceIMPL;
+    private final CommentService commentService;
 
-    public BlogController(@Qualifier("blogServiceIMPL") BlogService blogService) {
+    public BlogController(@Qualifier("blogServiceIMPL") BlogService blogService, RoleService roleService
+            , UserServiceIMPL userServiceIMPL, @Qualifier("commentServiceIMPL") CommentService commentService) {
         this.blogService = blogService;
+        this.roleService = roleService;
+        this.userServiceIMPL = userServiceIMPL;
+        this.commentService = commentService;
     }
 
     @GetMapping
@@ -43,7 +54,7 @@ public class BlogController {
     }
 
     @PostMapping("/private/create")
-    public String createBlog(@Valid Blog blog, BindingResult errors, @AuthenticationPrincipal User user, Model model) {
+    public String createBlog(@Valid Blog blog, BindingResult errors, @AuthenticationPrincipal User user) {
 
         if (errors.hasErrors()) {
             return "createBlog";
@@ -80,11 +91,34 @@ public class BlogController {
     @GetMapping("/delete")
     public String deleteBlog(@RequestParam UUID id, @AuthenticationPrincipal User user) {
         User blogUser = blogService.getBlog(id).getUser();
+        Role r = roleService.getRoleByName("ADMIN");
+
         if (user.getUserID().equals(blogUser.getUserID())) {
             blogService.removeBlog(id);
             return "redirect:/user/blogs";
-        } else {
-            return "redirect:/blog";
+        } else if (user.getRoles().stream().anyMatch(role -> role.getId().equals(r.getId()))) {
+            blogService.removeBlog(id);
         }
+        return "redirect:/blog";
+    }
+
+    @GetMapping("/update")
+    private String updateBlog(@RequestParam UUID id, Model model) {
+        Blog blog = blogService.getBlog(id);
+
+        model.addAttribute("blog", blog);
+        return "updateBlog";
+    }
+
+    @PostMapping("/update/{id}")
+    private String updateBlog(Blog blog, @RequestParam UUID userID, @RequestParam UUID blogID) {
+        Set<Comment> comments = commentService.getCommentsByBlogID(blogID);
+
+        blog.setBlogID(blogID);
+        blog.setComments(comments);
+        blog.setUser(userServiceIMPL.getUserById(userID));
+        blogService.updateBlog(blog);
+
+        return "redirect:/blog";
     }
 }

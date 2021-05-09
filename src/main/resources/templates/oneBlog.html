@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/main :: header('Blog')"></head>
 
@@ -13,9 +13,9 @@
             <h1 th:text="*{username}" class="text-center"></h1>
         </div>
 
-        <div th:object="${blog}" class="main-color mt-2 comments-container">
-            <h2 th:text="*{title}"></h2>
-            <p th:text="*{description}" class="comments-padding"></p>
+        <div th:object="${blog}" class="main-color mt-2 comments-container ">
+            <h2 th:text="*{title}" class="ms-2"></h2>
+            <p th:text="*{description}" class="comments-padding ms-1"></p>
         </div>
     </div>
 
@@ -35,11 +35,19 @@
             <p class="comments-padding" th:text="${comment.description}"></p>
 
             <span th:if="${loggedInUser ne null}">
-                <span th:if="${loggedInUser.getUserID().equals(user.getUserID()) || loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
-                    <a class="btn btn-outline-danger " th:href="@{/comment/delete/{id}(id = ${comment.getCommentID()})}" th:text="#{delete}"></a>
+                <span sec:authorize="!hasRole('ADMIN')">
+
+                    <span th:if="${loggedInUser.getUserID().equals(user.getUserID()) || loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
+                        <a class="btn btn-outline-danger " th:href="@{/comment/delete/{id}(id = ${comment.getCommentID()})}" th:text="#{delete}"></a>
+                    </span>
+
+                    <span th:if="${loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
+                        <a class="btn btn-outline-danger " th:href="@{/comment/update(id = ${comment.getCommentID()})}" th:text="#{edit}"></a>
+                    </span>
                 </span>
 
-                <span th:if="${loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
+                <span sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-outline-danger ms-auto" th:href="@{/blog/delete(id=${blog.getBlogID()})}" th:text="#{delete}"></a>
                     <a class="btn btn-outline-danger " th:href="@{/comment/update(id = ${comment.getCommentID()})}" th:text="#{edit}"></a>
                 </span>
             </span>

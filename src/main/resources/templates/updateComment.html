@@ -6,7 +6,8 @@
 <nav th:replace="fragments/main :: navbar"></nav>
 
 <div class="container reg-container">
-    <form method="POST" th:object="${comment}" th:action="@{/comment/update/{id}(id = ${blogId},commentID = ${comment.getCommentID()})}">
+    <form method="POST" th:object="${comment}"
+          th:action="@{/comment/update/{id}(id = ${blogId},commentID = ${comment.getCommentID()},commentUserID = ${comment.getUser().getUserID()})}">
 
         <div class="mb-3">
             <label for="comment" class="form-label" th:text="#{Comment}"></label>
@@ -14,7 +15,7 @@
         </div>
 
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-outline-danger" th:text="#{Create}"></button>
+            <button type="submit" class="btn btn-outline-danger" th:text="#{update}"></button>
         </div>
     </form>
 </div>

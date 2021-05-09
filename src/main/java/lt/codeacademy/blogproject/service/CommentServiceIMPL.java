@@ -5,7 +5,9 @@ import lt.codeacademy.blogproject.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceIMPL implements CommentService{
@@ -38,5 +40,10 @@ public class CommentServiceIMPL implements CommentService{
     @Override
     public void removeComment(UUID id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public Set<Comment> getCommentsByBlogID(UUID uuid) {
+        return commentRepository.findAll().stream().filter(comment -> comment.getBlog().getBlogID().equals(uuid)).collect(Collectors.toSet());
     }
 }

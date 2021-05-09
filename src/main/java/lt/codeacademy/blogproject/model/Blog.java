@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class Blog {
     @Size(min = 3, max = 255)
     private String title;
 
-    @Size(min = 10, max = 255)
+    @Size(min = 1, max = 255)
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
