@@ -25,21 +25,37 @@
 
         <div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
 
+
             <div class="d-flex ms-auto text-white" sec:authorize="!isAuthenticated()">
-                <a th:href="@{/signIn}" class="btn btn-outline-danger me-2" tabindex="-1" role="button" >
+                <a th:href="@{/signIn}" class="btn btn-outline-danger me-2" tabindex="-1" role="button">
                     <i class="fa fa-sign-in me-1" aria-hidden="true"></i><span th:text="#{login}"></span>
                 </a>
-                <a th:href="@{/user/create}" class="btn btn-outline-danger me-2" tabindex="-1" role="button" >
-                    <i class="fa fa-sign-out me-1" aria-hidden="true"></i><span th:text="#{register}">Register</span>
+                <a th:href="@{/user/create}" class="btn btn-outline-danger me-2" tabindex="-1" role="button">
+                    <i class="fa fa-sign-out me-1" aria-hidden="true"></i><span th:text="#{register}"></span>
                 </a>
             </div>
 
-            <div class="d-flex ms-auto text-white" sec:authorize="isAuthenticated()">
-                <i class="fa fa-user-circle" aria-hidden="true" >
+            <div class="d-flex ms-auto text-white me-2" sec:authorize="isAuthenticated()">
+                <i class="fa fa-user-circle" aria-hidden="true">
                     <span sec:authentication="principal.username" class="ms-1"></span>
                 </i>
             </div>
 
+            <div class=" text-white dropdown me-2">
+                <a class="btn btn-outline-danger dropdown-toggle"
+                   href="#"
+                   id="navbarDropdownMenuLink"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false" th:text="#{lang.options}">
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" th:href="${{#httpServletRequest.requestURI}} + '?lang=LT'"
+                           th:text="#{lang.lt}"></a></li>
+                    <li><a class="dropdown-item" th:href="${{#httpServletRequest.requestURI}} + '?lang=EN'"
+                           th:text="#{lang.en}"></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
