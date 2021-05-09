@@ -49,11 +49,15 @@ public class BlogController {
     }
 
     @GetMapping("/open")
-    public String openBlog(@RequestParam UUID id, Model model){
+    public String openBlog(@RequestParam UUID id, Model model,@AuthenticationPrincipal User loggedInUser){
         Blog blog = blogService.getBlog(id);
 
         User user = blog.getUser();
         Set<Comment> comments = blog.getComments();
+
+        if (loggedInUser != null){
+            model.addAttribute("loggedInUser", loggedInUser);
+        }
 
         if (user != null){
             model.addAttribute("user",user);

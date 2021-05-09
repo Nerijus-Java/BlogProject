@@ -1,12 +1,12 @@
 package lt.codeacademy.blogproject.controller;
 
+import lt.codeacademy.blogproject.model.Blog;
 import lt.codeacademy.blogproject.model.Comment;
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.service.BlogService;
 import lt.codeacademy.blogproject.service.CommentService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,20 +27,31 @@ public class CommentController {
     }
 
     @GetMapping("/create")
-    public String openCreateComment(Model model, @RequestParam UUID id){
+    public String openCreateComment(Model model, @RequestParam UUID id) {
 
-        model.addAttribute("comment",new Comment());
-        model.addAttribute("blogId",id);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("blogId", id);
         return "comments";
     }
 
     @PostMapping("/create/{id}")
-    public String createBlog(Comment comment, @AuthenticationPrincipal User user,@PathVariable UUID id) {
+    public String createComment(Comment comment, @AuthenticationPrincipal User user, @PathVariable UUID id) {
         comment.setUser(user);
         comment.setBlog(blogService.getBlog(id));
 
         commentService.addComment(comment);
 
         return "redirect:/blog/open?id=" + id.toString().trim();
+    }
+
+    @GetMapping("/delete/{id}")
+    private String deleteComment(@PathVariable UUID id, @AuthenticationPrincipal User user) {
+        User commentUser = commentService.getComment(id).getUser();
+        Blog blog = commentService.getComment(id).getBlog();
+        if (user.getUserID().equals(commentUser.getUserID()) || user.getUserID().equals(blog.getUser().getUserID())) {
+            commentService.removeComment(id);
+            return "redirect:/blog/open?id=" + blog.getBlogID();
+        }
+        return "redirect:/blog";
     }
 }
