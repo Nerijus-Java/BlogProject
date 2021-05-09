@@ -32,4 +32,5 @@ public class Comment {
     @JoinColumn(name = "commentIdUser")
     private User user;
 
+
 }

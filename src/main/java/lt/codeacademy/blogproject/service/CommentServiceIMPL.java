@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CommentServiceMpl implements CommentService{
+public class CommentServiceIMPL implements CommentService{
     private final CommentRepository commentRepository;
 
-    public CommentServiceMpl(CommentRepository commentRepository) {
+    public CommentServiceIMPL(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 

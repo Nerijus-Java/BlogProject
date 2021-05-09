@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class BlogServiceMpl implements BlogService{
+public class BlogServiceIMPL implements BlogService{
 
     private final BlogRepository blogRepository;
 
-    public BlogServiceMpl(BlogRepository blogRepository) {
+    public BlogServiceIMPL(BlogRepository blogRepository) {
         this.blogRepository = blogRepository;
     }
 

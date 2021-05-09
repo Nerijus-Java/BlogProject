@@ -38,6 +38,10 @@
                 <span th:if="${loggedInUser.getUserID().equals(user.getUserID()) || loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
                     <a class="btn btn-outline-danger " th:href="@{/comment/delete/{id}(id = ${comment.getCommentID()})}" th:text="#{delete}"></a>
                 </span>
+
+                <span th:if="${loggedInUser.getUserID().equals(comment.getUser().getUserID())}">
+                    <a class="btn btn-outline-danger " th:href="@{/comment/update(id = ${comment.getCommentID()})}" th:text="#{edit}"></a>
+                </span>
             </span>
 
         </div>

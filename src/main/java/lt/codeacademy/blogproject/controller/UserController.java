@@ -4,7 +4,7 @@ import lt.codeacademy.blogproject.model.Role;
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.service.BlogService;
 import lt.codeacademy.blogproject.service.RoleService;
-import lt.codeacademy.blogproject.service.UserServiceMpl;
+import lt.codeacademy.blogproject.service.UserServiceIMPL;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,14 +23,14 @@ import java.util.Set;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceMpl userServiceMpl;
+    private final UserServiceIMPL userServiceIMPL;
     private final BlogService blogService;
     private final RoleService roleService;
     private final PasswordEncoder encoder;
 
-    public UserController(UserServiceMpl userServiceMpl, @Qualifier("blogServiceMpl") BlogService blogService
+    public UserController(UserServiceIMPL userServiceIMPL, @Qualifier("blogServiceIMPL") BlogService blogService
             , RoleService roleService, PasswordEncoder encoder) {
-        this.userServiceMpl = userServiceMpl;
+        this.userServiceIMPL = userServiceIMPL;
         this.blogService = blogService;
         this.roleService = roleService;
         this.encoder = encoder;
@@ -56,7 +56,7 @@ public class UserController {
         String encodedPass = encoder.encode(user.getPassword());
 
         user.setPassword(encodedPass);
-        userServiceMpl.saveUser(user);
+        userServiceIMPL.saveUser(user);
         return "redirect:/signIn";
     }
 

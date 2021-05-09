@@ -22,8 +22,8 @@ public class CommentController {
     private final BlogService blogService;
     private final CommentService commentService;
 
-    public CommentController(@Qualifier("blogServiceMpl") BlogService blogService
-            , @Qualifier("commentServiceMpl") CommentService commentService) {
+    public CommentController(@Qualifier("blogServiceIMPL") BlogService blogService
+            , @Qualifier("commentServiceIMPL") CommentService commentService) {
         this.blogService = blogService;
         this.commentService = commentService;
     }
@@ -60,5 +60,26 @@ public class CommentController {
             return "redirect:/blog/open?id=" + blog.getBlogID();
         }
         return "redirect:/blog";
+    }
+
+    @GetMapping("/update")
+    private String updateComment(@RequestParam UUID id, Model model){
+        Comment comment = commentService.getComment(id);
+
+        model.addAttribute("comment", comment);
+        model.addAttribute("blogId", comment.getBlog().getBlogID());
+        return "updateComment";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateComment(Comment comment, @AuthenticationPrincipal User user, @PathVariable UUID id,@RequestParam UUID commentID){
+        Blog blog = blogService.getBlog(id);
+
+        comment.setCommentID(commentID);
+        comment.setBlog(blog);
+        comment.setUser(user);
+        commentService.updateComment(comment);
+
+        return "redirect:/blog/open?id=" + blog.getBlogID();
     }
 }

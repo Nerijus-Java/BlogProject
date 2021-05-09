@@ -1,19 +1,19 @@
 package lt.codeacademy.blogproject.service;
 
-import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
-public class UserServiceMpl implements UserDetailsService {
+@Primary
+public class UserServiceIMPL implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserServiceMpl(UserRepository userRepository) {
+    public UserServiceIMPL(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
