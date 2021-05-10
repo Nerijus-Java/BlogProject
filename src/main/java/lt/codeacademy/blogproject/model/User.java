@@ -26,7 +26,6 @@ public class User implements UserDetails {
     private UUID userID;
 
     @NotBlank
-    @Pattern(regexp = "^[a-z0-9_-]{3,16}$")
     private String username;
 
     @NotBlank
