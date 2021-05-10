@@ -12,4 +12,5 @@ public interface BlogRepository extends JpaRepository<Blog, UUID> {
     Blog findByTitle(String title);
 
     List<Blog> findByUser(User user);
+
 }

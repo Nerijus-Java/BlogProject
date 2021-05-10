@@ -54,7 +54,6 @@ public class BlogController {
             model.addAttribute("blog", new Blog());
             return "createBlog";
         }
-
         return "redirect:/blog";
     }
 

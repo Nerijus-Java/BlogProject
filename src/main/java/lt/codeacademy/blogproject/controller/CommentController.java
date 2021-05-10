@@ -44,9 +44,10 @@ public class CommentController {
     }
 
     @PostMapping("/create/{id}")
-    public String createComment(@Valid Comment comment, BindingResult errors, @AuthenticationPrincipal User user, @PathVariable UUID id) {
+    public String createComment(@Valid Comment comment, BindingResult errors, @AuthenticationPrincipal User user, @PathVariable UUID id, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("blogId", id);
             return "comments";
         }
 
