@@ -15,7 +15,7 @@
     <h1 th:text="#{${title}}"></h1>
 </div>
 
-<div class="container mt-2 main-container">
+<div class="container mt-2 main-container" sec:authorize="hasRole('ADMIN')">
     <div class="container">
         <a class="btn btn-outline-danger" th:href="@{/blog/private/create}" th:text="#{add.post}"></a>
     </div>
@@ -31,12 +31,6 @@
                     <h5 class="card-title" th:text="${blog.title}"></h5>
                     <p class="card-text" th:text="${blog.description}"></p>
                     <a th:href="@{/blog/open(id=${blog.getBlogID()})}" class="btn btn-outline-danger" th:text="#{read.more}"></a>
-
-                    <span sec:authorize="!hasRole('ADMIN')">
-                        <span th:if="${myBlogs}" class="delete">
-                            <a class="btn btn-outline-danger ms-auto" th:href="@{/blog/delete(id=${blog.getBlogID()})}" th:text="#{delete}"></a>
-                        </span>
-                    </span>
 
                     <span sec:authorize="hasRole('ADMIN')" class="ms-1">
                         <a class="btn btn-outline-danger ms-auto" th:href="@{/blog/delete(id=${blog.getBlogID()})}" th:text="#{delete}"></a>

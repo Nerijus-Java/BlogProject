@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div class="container main-container text-white mt-2">
+<div class="container main-container text-white mt-2" th:if="${!#lists.isEmpty(comments)}">
     <div class="mt-1 comments-container" th:each="comment : ${comments}">
         <div class="main-color onHover mt-1 comments">
             <h4 th:text="${comment.user.getUsername()}"></h4>
@@ -47,7 +47,7 @@
                 </span>
 
                 <span sec:authorize="hasRole('ADMIN')">
-                    <a class="btn btn-outline-danger ms-auto" th:href="@{/blog/delete(id=${blog.getBlogID()})}" th:text="#{delete}"></a>
+                    <a class="btn btn-outline-danger ms-auto" th:href="@{/comment/delete/{id}(id = ${comment.getCommentID()})}" th:text="#{delete}"></a>
                     <a class="btn btn-outline-danger " th:href="@{/comment/update(id = ${comment.getCommentID()})}" th:text="#{edit}"></a>
                 </span>
             </span>

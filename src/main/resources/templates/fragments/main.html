@@ -42,7 +42,9 @@
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu main-color" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item text-white" th:href="@{/user/blogs}" th:text="#{user.blogs}"></a></li>
+                        <span sec:authorize="hasRole('ADMIN')">
+                            <li><a class="dropdown-item text-white" th:href="@{/user/blogs}" th:text="#{user.blogs}"></a></li>
+                        </span>
                         <li><a class="dropdown-item text-white" th:href="@{/logout}" th:text="#{user.logout}"></a></li>
                     </ul>
                 </div>

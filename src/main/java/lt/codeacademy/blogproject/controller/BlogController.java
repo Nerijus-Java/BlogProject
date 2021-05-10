@@ -43,14 +43,19 @@ public class BlogController {
     public String getBlogs(Model model) {
         model.addAttribute("blog", blogService.getAllBlogs());
         model.addAttribute("title", "Blogs");
-        model.addAttribute("myBlogs", false);
         return "blog";
     }
 
     @GetMapping("/private/create")
-    public String openCreateBlogForm(Model model) {
-        model.addAttribute("blog", new Blog());
-        return "createBlog";
+    public String openCreateBlogForm(Model model,@AuthenticationPrincipal User user) {
+        Role r = roleService.getRoleByName("ADMIN");
+
+        if (user.getRoles().stream().anyMatch(role -> role.getId().equals(r.getId()))) {
+            model.addAttribute("blog", new Blog());
+            return "createBlog";
+        }
+
+        return "redirect:/blog";
     }
 
     @PostMapping("/private/create")
@@ -68,8 +73,8 @@ public class BlogController {
 
     @GetMapping("/open")
     public String openBlog(@RequestParam UUID id, Model model, @AuthenticationPrincipal User loggedInUser) {
-        Blog blog = blogService.getBlog(id);
 
+        Blog blog = blogService.getBlog(id);
         User user = blog.getUser();
         Set<Comment> comments = blog.getComments();
 
@@ -90,13 +95,9 @@ public class BlogController {
 
     @GetMapping("/delete")
     public String deleteBlog(@RequestParam UUID id, @AuthenticationPrincipal User user) {
-        User blogUser = blogService.getBlog(id).getUser();
         Role r = roleService.getRoleByName("ADMIN");
 
-        if (user.getUserID().equals(blogUser.getUserID())) {
-            blogService.removeBlog(id);
-            return "redirect:/user/blogs";
-        } else if (user.getRoles().stream().anyMatch(role -> role.getId().equals(r.getId()))) {
+        if (user.getRoles().stream().anyMatch(role -> role.getId().equals(r.getId()))) {
             blogService.removeBlog(id);
         }
         return "redirect:/blog";
@@ -111,13 +112,17 @@ public class BlogController {
     }
 
     @PostMapping("/update/{id}")
-    private String updateBlog(Blog blog, @RequestParam UUID userID, @RequestParam UUID blogID) {
+    private String updateBlog(Blog blog, @RequestParam UUID userID, @RequestParam UUID blogID,@AuthenticationPrincipal User user) {
         Set<Comment> comments = commentService.getCommentsByBlogID(blogID);
+        Role r = roleService.getRoleByName("ADMIN");
 
-        blog.setBlogID(blogID);
-        blog.setComments(comments);
-        blog.setUser(userServiceIMPL.getUserById(userID));
-        blogService.updateBlog(blog);
+        if (user.getRoles().stream().anyMatch(role -> role.getId().equals(r.getId()))) {
+            blog.setBlogID(blogID);
+            blog.setComments(comments);
+            blog.setUser(userServiceIMPL.getUserById(userID));
+            blogService.updateBlog(blog);
+
+        }
 
         return "redirect:/blog";
     }
