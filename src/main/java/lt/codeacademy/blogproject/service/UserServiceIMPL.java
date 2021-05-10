@@ -2,7 +2,6 @@ package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.model.User;
 import lt.codeacademy.blogproject.repository.UserRepository;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
